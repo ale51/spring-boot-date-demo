@@ -1,5 +1,6 @@
 package com.example.datedemo;
 
+import lombok.Data;
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,7 @@ import java.time.LocalDate;
 public class LocalDateController {
 
     @GetMapping
-    public void get(@RequestParam(name = "date") @DateTimeFormat LocalDate localDate){
+    public void get(@RequestParam(name = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate localDate){
         System.out.println(localDate);
     }
 
@@ -43,6 +44,7 @@ public class LocalDateController {
         System.out.println(multiForm.getEndAt());
     }
 
+    // @RequestBodyの場合はformatはできない模様。
     @PostMapping("format")
     public void post2(
             @RequestBody MultiFormatForm multiFormatForm
@@ -51,21 +53,21 @@ public class LocalDateController {
         System.out.println(multiFormatForm.getStartAt());
     }
 
-    @Getter
+    @Data
     static class MultiForm {
-        @DateTimeFormat
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
         private LocalDate startAt;
 
-        @DateTimeFormat
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
         private LocalDate endAt;
     }
 
-    @Getter
+    @Data
     static class MultiFormatForm {
-        @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+        @DateTimeFormat(pattern = "yyyy/MM/dd")
         private LocalDate startAt;
 
-        @DateTimeFormat(pattern = "yyyyMMdd HH:mm:ss")
+        @DateTimeFormat(pattern = "yyyy/MM/dd")
         private LocalDate endAt;
     }
 }
