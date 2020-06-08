@@ -7,15 +7,16 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 
 @RestController
+@RequestMapping("localdatetime")
 public class LocalDateTimeController {
 
     @GetMapping
-    public void get(@RequestParam(name = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime localDateTime){
+    public void get(@RequestParam(name = "datetime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime localDateTime){
         System.out.println(localDateTime);
     }
 
     @GetMapping("format")
-    public void get2(@RequestParam(name = "date") @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss") LocalDateTime localDateTime){
+    public void get2(@RequestParam(name = "datetime") @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss") LocalDateTime localDateTime){
         System.out.println(localDateTime);
     }
 
@@ -23,16 +24,16 @@ public class LocalDateTimeController {
     public void get3(
             @ModelAttribute MultiForm multiForm
     ){
-        System.out.println(multiForm.getEndAt());
         System.out.println(multiForm.getStartAt());
+        System.out.println(multiForm.getEndAt());
     }
 
     @GetMapping("multi/format")
     public void get4(
             @ModelAttribute MultiFormatForm multiFormatForm
     ){
-        System.out.println(multiFormatForm.getEndAt());
         System.out.println(multiFormatForm.getStartAt());
+        System.out.println(multiFormatForm.getEndAt());
     }
 
     @PostMapping
@@ -49,7 +50,7 @@ public class LocalDateTimeController {
             @RequestBody MultiFormatForm multiFormatForm
     ){
         System.out.println(multiFormatForm.getStartAt());
-        System.out.println(multiFormatForm.getStartAt());
+        System.out.println(multiFormatForm.getEndAt());
     }
 
     @Data

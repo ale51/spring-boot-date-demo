@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 
 @RestController
+@RequestMapping("localdate")
 public class LocalDateController {
 
     @GetMapping
@@ -23,16 +24,16 @@ public class LocalDateController {
     public void get3(
             @ModelAttribute MultiForm multiForm
     ){
-        System.out.println(multiForm.getEndAt());
         System.out.println(multiForm.getStartAt());
+        System.out.println(multiForm.getEndAt());
     }
 
     @GetMapping("multi/format")
     public void get4(
             @ModelAttribute MultiFormatForm multiFormatForm
     ){
-        System.out.println(multiFormatForm.getEndAt());
         System.out.println(multiFormatForm.getStartAt());
+        System.out.println(multiFormatForm.getEndAt());
     }
 
     @PostMapping
@@ -49,7 +50,7 @@ public class LocalDateController {
             @RequestBody MultiFormatForm multiFormatForm
     ){
         System.out.println(multiFormatForm.getStartAt());
-        System.out.println(multiFormatForm.getStartAt());
+        System.out.println(multiFormatForm.getEndAt());
     }
 
     @Data
